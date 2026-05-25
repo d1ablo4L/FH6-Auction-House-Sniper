@@ -4,7 +4,7 @@
 
 Watches the Auction House for the car you set up, buys it out the instant it appears, collects it, and loops. Set your filters once and leave it running. This tool has about a 10% buyout rate, and generally can snipe a car in under 5 mins.
 
-[FH6 Sniper overlay]
+<img width="1655" height="792" alt="image-3" src="https://github.com/user-attachments/assets/b8047bfe-df94-4e19-bae4-8e2aaf506002" />
 
 ---
 
@@ -29,8 +29,8 @@ Watches the Auction House for the car you set up, buys it out the instant it app
 - Keyboard menu navigation (the bot uses keys, not the mouse)
 - Wired ethernet strongly recommended
 
-[1920x1080/Uncapped Frame Rate]
-[Very Low]
+<img width="1386" height="763" alt="image-4" src="https://github.com/user-attachments/assets/3a9b02f4-b3ae-429d-b2d7-563baf3026dc" />
+<img width="1386" height="758" alt="image-5" src="https://github.com/user-attachments/assets/433e36b2-0602-4111-8d51-79ef931fb603" />
 
 
 
@@ -48,7 +48,7 @@ Grab the latest **FH6-Sniper.zip** from the [Releases page](https://github.com/F
 
 Launch Forza Horizon 6 and head into the Auction House at the festival site.
 
-[Auction House menu at the festival site]
+<img width="1916" height="971" alt="image-1" src="https://github.com/user-attachments/assets/29f934a8-2aa4-436f-aac7-88c9363ab168" />
 
 ---
 
@@ -61,7 +61,7 @@ Open **Search Auctions** and set your filters:
 
 Back out so the screen sits on the **Search config** view. That's where the bot expects to start.
 
-[Search filters and Search config screen]
+<img width="1902" height="1062" alt="image-2" src="https://github.com/user-attachments/assets/981ec234-fb9e-4390-babd-125e2342136e" />
 
 ---
 
@@ -73,7 +73,7 @@ Click back into FH6, press **F8**, and leave it running.
 
 To stop: **F8** again, **F9** for panic, or click **STOP** on the overlay.
 
-[FH6-Sniper.exe running with overlay visible]
+<img width="1902" height="1062" alt="image-2" src="https://github.com/user-attachments/assets/6ae3d516-4339-48a8-a451-7c199fd36f20" />
 
 ---
 
