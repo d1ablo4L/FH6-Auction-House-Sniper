@@ -23,6 +23,10 @@ class Config:
     # bump if the bot occasionally opens Place Bid instead of Buy Out -
     # usually means FH6 didn't register the Down before Enter arrived.
     buyout_select_delay_ms: int = 0
+    # Whether moving background is enabled in FH6 video settings. Picks
+    # which buy_out template set to load - keeping the other set unused
+    # saves a couple of full-res template matches per buyout poll.
+    moving_background: bool = True
     # timeouts in seconds
     timeout_results_s: float = 12.0
     timeout_outcome_s: float = 25.0

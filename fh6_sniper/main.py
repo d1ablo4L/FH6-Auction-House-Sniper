@@ -32,7 +32,9 @@ def main() -> None:
     log_path = _setup_logging()
     logging.getLogger("fh6").info("FH6 Sniper starting (log: %s)", log_path)
     cfg = load_config(paths.app_dir() / "config.json")
-    templates = vision.load_templates(paths.app_dir() / cfg.template_dir)
+    templates = vision.load_templates(
+        paths.app_dir() / cfg.template_dir,
+        moving_background=cfg.moving_background)
     io = GameIO(cfg, templates)
     overlay = Overlay(
         hide_from_capture=not getattr(cfg, "overlay_capturable", False))

@@ -91,10 +91,21 @@ def _small(tmpl: np.ndarray) -> np.ndarray:
     return cached
 
 
-def load_templates(template_dir) -> dict:
-    """Load every detection template as grayscale. Raises if any is missing."""
+def load_templates(template_dir, moving_background: bool = True) -> dict:
+    """Load every detection template as grayscale. Raises if any is missing.
+
+    `moving_background` selects which buy_out body template set to load:
+    True (default) uses the BG-on variants, False uses the *_bgoff variants.
+    Skipping the other set saves a couple of full-res matches per buyout
+    poll.
+    """
     out = {}
     for name in TEMPLATE_SCREENS:
+        is_bgoff = name.endswith("_bgoff.png")
+        if moving_background and is_bgoff:
+            continue
+        if not moving_background and _has_bgoff_variant(name):
+            continue
         path = Path(template_dir) / name
         img = cv2.imread(str(path))
         if img is None:
@@ -103,6 +114,14 @@ def load_templates(template_dir) -> dict:
         out[name] = gray
         _DOWNSCALED_TEMPLATES[id(gray)] = _downscale(gray)
     return out
+
+
+def _has_bgoff_variant(name: str) -> bool:
+    """True if this template has a *_bgoff sibling registered."""
+    if name.endswith("_bgoff.png"):
+        return False
+    sibling = name[:-len(".png")] + "_bgoff.png"
+    return sibling in TEMPLATE_SCREENS
 
 
 # Distinctive results templates beat ah_landing (whose title also appears
