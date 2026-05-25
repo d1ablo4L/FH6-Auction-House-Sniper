@@ -287,6 +287,42 @@ class Sniper:
             self.sleeper(0.6)
         return "no_cars"
 
+    def _confirm_yes(self):
+        """Press Yes on the BUY_OUT confirm dialog and observe the screen
+        until an outcome appears. State-machine instead of brute-force retry:
+
+        - **BUY_OUT** (confirm dialog still showing) -> Enter was dropped,
+          re-press (bounded).
+        - **BUYOUT_PROGRESS** or **UNKNOWN** -> request likely in flight,
+          just keep polling. Never re-press here, since an unseen outcome
+          popup could be dismissed by a stray Enter.
+        - **BUYOUT_SUCCESS / BUYOUT_FAILED** -> done, return it.
+
+        Times out after `cfg.timeout_outcome_s` of no outcome.
+        """
+        cfg = self.cfg
+        self._press("enter")
+        deadline = self.clock() + cfg.timeout_outcome_s
+        enter_attempts = 1
+        targets = {Screen.BUY_OUT, Screen.BUYOUT_PROGRESS,
+                   Screen.BUYOUT_SUCCESS, Screen.BUYOUT_FAILED}
+        while self.clock() < deadline:
+            if self._stop:
+                return None
+            before = self.clock()
+            self._guard_focus()
+            if self._stop:
+                return None
+            deadline += self.clock() - before
+            s = self.io.screen(targets=targets)
+            if s in (Screen.BUYOUT_SUCCESS, Screen.BUYOUT_FAILED):
+                return s
+            if s == Screen.BUY_OUT and enter_attempts < 4:
+                self._press("enter")
+                enter_attempts += 1
+            self._poll_delay()
+        return None
+
     def _collect(self) -> None:
         """Collect a won car. The Claim Car popup has two stages that both
         read as CLAIM_CAR; press Enter until the screen leaves it."""
@@ -365,27 +401,7 @@ class Sniper:
         if seen is None:
             return self._recover()
 
-        # Confirm Yes. If the Attempting-Buyout (BUYOUT_PROGRESS) screen
-        # doesn't appear within ~0.7s the press was dropped, so retry
-        # immediately instead of burning a long timeout. Once we see
-        # PROGRESS the request is in flight and we wait the full outcome
-        # timeout without re-pressing.
-        outcome = None
-        for _ in range(4):
-            if self._stop:
-                return self._recover()
-            self._press("enter")
-            seen = self.wait_for(
-                {Screen.BUYOUT_PROGRESS,
-                 Screen.BUYOUT_SUCCESS, Screen.BUYOUT_FAILED}, 0.7)
-            if seen in (Screen.BUYOUT_SUCCESS, Screen.BUYOUT_FAILED):
-                outcome = seen
-                break
-            if seen == Screen.BUYOUT_PROGRESS:
-                outcome = self.wait_for(
-                    {Screen.BUYOUT_SUCCESS, Screen.BUYOUT_FAILED},
-                    cfg.timeout_outcome_s)
-                break
+        outcome = self._confirm_yes()
         if outcome is None:
             return self._recover()
 
