@@ -105,6 +105,7 @@ The bot is ready to go out of the box. If you want to tweak it, open **config.js
 - **max_minutes** - auto-stop after this many minutes (default: 180)
 - **collect_after_buyout** - set to `false` if you'd rather collect cars manually
 - **notify_sound** / **notify_toast** - turn the win beep or toast off
+- **buyout_select_delay_ms** - extra ms between selecting Buy Out and pressing Enter. Bump to `200` if the bot occasionally opens the Place Bid dialog instead of Buy Out (default: 0)
 
 ---
 
