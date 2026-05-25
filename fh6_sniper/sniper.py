@@ -210,19 +210,33 @@ class Sniper:
         return self.io.confirm_highlighted()
 
     def _recover(self) -> str:
-        """ESC out toward Search config or AH landing. Never ESCs from an
-        UNKNOWN frame."""
+        """ESC out toward Search config or AH landing.
+
+        Avoids ESCing from a single UNKNOWN frame (could be a mid-transition
+        flicker), but ESCs after the screen has been persistently UNKNOWN.
+        Persistent UNKNOWN usually means we're on a popup with no template
+        (e.g. the Place Bid dialog) and need to back out. ESC only ever
+        closes popups, never confirms anything.
+        """
         self._status("Recovering")
         s = self.io.screen()
+        unknown_streak = 0
         for _ in range(10):
             if self._stop:
                 return "recover_failed"
             if s in (Screen.SEARCH_CONFIG, Screen.AH_LANDING):
                 return "recovered"
             if s == Screen.UNKNOWN:
+                unknown_streak += 1
+                if unknown_streak >= 4:           # ~1.2s of stuck UNKNOWN
+                    self._press("esc")
+                    unknown_streak = 0
+                    s = self._await_settle(prev=s)
+                    continue
                 self.sleeper(0.3)
                 s = self.io.screen()
                 continue
+            unknown_streak = 0
             self._press("esc")
             s = self._await_settle(prev=s)
         log.info("recover: gave up")
