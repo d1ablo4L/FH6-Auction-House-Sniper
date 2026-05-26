@@ -144,8 +144,6 @@ The bot is ready to go out of the box. If you want to tweak it, open **config.js
 
 **Bot misses a screen and just sits there** - restart FH6 and the bot. Make sure your graphics preset is **Very Low** and your resolution is **1920 x 1080**.
 
-**When posting issues relating to the bot** - Please include your Sniper.log so that I can look into it.
-
   **The sniper opens the Buy Out dialog but won't click Yes.**
   <img width="1513" height="840" alt="image" src="https://github.com/user-attachments/assets/61472f11-389c-47f9-90e3-197530331486" />
 
@@ -164,3 +162,4 @@ The bot is ready to go out of the box. If you want to tweak it, open **config.js
   - **Capturable overlay sitting over the menus.** If you've enabled **Show overlay in screenshots & recordings**, the overlay can land on top of the area the sniper is reading. Drag it to the top-right or bottom-right corner so it doesn't overlap the game UI.
 
   If neither helps, [open an issue](https://github.com/FrostyIsBored/FH6-Auction-House-Sniper/issues) or message me on Discord.
+  **When posting issues relating to the bot** - Please include your Sniper.log so that I can look into it.
