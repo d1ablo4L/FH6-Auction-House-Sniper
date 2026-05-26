@@ -5,7 +5,7 @@ import sys
 import threading
 from pynput import keyboard
 from . import capture, notifier, paths, vision
-from .config import load_config
+from .config import load_config, save_config
 from .overlay import Overlay
 from .sniper import GameIO, Sniper
 
@@ -68,6 +68,7 @@ def main() -> None:
         if state["thread"] and state["thread"].is_alive():
             return
         capture.focus_window(cfg.window_title)
+        capture.reset_normalize_plan()             # detect crop afresh each run
         state["last_bot_stats"] = (0, 0, 0)        # new Sniper, fresh deltas
         sniper = Sniper(io, cfg, on_purchase=on_purchase,
                         on_status=overlay.set_status,
@@ -98,19 +99,62 @@ def main() -> None:
         else:
             start()
 
-    hotkeys = keyboard.GlobalHotKeys({
-        cfg.hotkey_start_stop: toggle,
-        cfg.hotkey_panic: stop,
-    })
-    hotkeys.start()
+    hotkeys_ref = {"listener": None}
 
+    def _bind_hotkeys(start_stop, panic):
+        listener = keyboard.GlobalHotKeys({start_stop: toggle, panic: stop})
+        listener.start()
+        hotkeys_ref["listener"] = listener
+
+    _bind_hotkeys(cfg.hotkey_start_stop, cfg.hotkey_panic)
+
+    def apply_settings(values):
+        """Apply settings dict to cfg in-place; persist; reload as needed."""
+        log = logging.getLogger("fh6.settings")
+        prev_bg = cfg.moving_background
+        prev_start = cfg.hotkey_start_stop
+        prev_panic = cfg.hotkey_panic
+        for key, value in values.items():
+            setattr(cfg, key, value)
+        try:
+            save_config(cfg, paths.app_dir() / "config.json")
+        except Exception as exc:
+            log.exception("save_config failed")
+            return f"Could not save config: {exc}"
+        if cfg.moving_background != prev_bg:
+            try:
+                io.templates = vision.load_templates(
+                    paths.app_dir() / cfg.template_dir,
+                    moving_background=cfg.moving_background)
+                log.info("templates reloaded (moving_background=%s)",
+                         cfg.moving_background)
+            except Exception as exc:
+                log.exception("template reload failed")
+                return f"Saved, but template reload failed: {exc}"
+        if (cfg.hotkey_start_stop != prev_start
+                or cfg.hotkey_panic != prev_panic):
+            try:
+                if hotkeys_ref["listener"] is not None:
+                    hotkeys_ref["listener"].stop()
+                _bind_hotkeys(cfg.hotkey_start_stop, cfg.hotkey_panic)
+                log.info("hotkeys rebound (%s / %s)",
+                         cfg.hotkey_start_stop, cfg.hotkey_panic)
+            except Exception as exc:
+                log.exception("hotkey rebind failed")
+                return f"Saved, but hotkey rebind failed: {exc}"
+        return None
+
+    overlay.bind_settings(cfg)
+    overlay.on_save(apply_settings)
     overlay.on_toggle(toggle)
     overlay.set_status("Idle")
     try:
         overlay.run()
     finally:
         stop()
-        hotkeys.stop()
+        listener = hotkeys_ref["listener"]
+        if listener is not None:
+            listener.stop()
 
 
 if __name__ == "__main__":

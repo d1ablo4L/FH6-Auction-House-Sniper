@@ -41,8 +41,8 @@ class GameIO:
 
     def confirm_highlighted(self) -> bool:
         frame = capture.grab_screen(self.cfg.window_title)
-        return vision.is_confirm_highlighted(
-            frame, self.cfg.lime_hsv_lower, self.cfg.lime_hsv_upper)
+        lo, hi = self.cfg.effective_lime_bounds()
+        return vision.is_confirm_highlighted(frame, lo, hi)
 
     def card_sold(self) -> bool:
         frame = capture.grab_screen(self.cfg.window_title)
@@ -369,7 +369,8 @@ class Sniper:
             return self._recover()
         result = self._press_until(
             "enter", Screen.SEARCH_CONFIG,
-            {Screen.RESULTS_HAS_CARS, Screen.RESULTS_EMPTY})
+            {Screen.RESULTS_HAS_CARS, Screen.RESULTS_EMPTY},
+            reach=cfg.timeout_results_s)
         if result is not Screen.RESULTS_HAS_CARS:
             self._back_to_landing(known=result)
             return "no_cars"

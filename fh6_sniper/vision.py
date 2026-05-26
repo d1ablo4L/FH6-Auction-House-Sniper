@@ -11,6 +11,7 @@ class Screen(Enum):
     SEARCH_CONFIG = auto()
     RESULTS_HAS_CARS = auto()
     RESULTS_EMPTY = auto()
+    RESULTS_LOADING = auto()
     AUCTION_OPTIONS = auto()
     PLAYER_OPTIONS = auto()
     BUY_OUT = auto()
@@ -25,6 +26,7 @@ TEMPLATE_SCREENS: dict[str, Screen] = {
     "search.png": Screen.SEARCH_CONFIG,
     "auction_details.png": Screen.RESULTS_HAS_CARS,
     "no_auctions.png": Screen.RESULTS_EMPTY,
+    "auction_loading.png": Screen.RESULTS_LOADING,
     "auction_options.png": Screen.AUCTION_OPTIONS,
     "player_options.png": Screen.PLAYER_OPTIONS,
     "buy_out.png": Screen.BUY_OUT,
@@ -141,6 +143,7 @@ TEMPLATE_REGIONS = {
     "search.png":             (472, 223, 1448, 471),
     "auction_details.png":    (889,  64, 1920, 294),
     "no_auctions.png":        (1113, 434, 1706, 690),
+    "auction_loading.png":    (870, 180, 1840, 870),
     "auction_options.png":    (546, 276, 1374, 526),
     "player_options.png":     (580, 230, 1340, 486),
     "buy_out.png":               (520, 470, 1400, 620),

@@ -12,9 +12,16 @@ class Config:
     window_title: str = "Forza Horizon 6"
     resolution: tuple = (1920, 1080)
     match_threshold: float = 0.80
-    # lime UI colour in HSV (OpenCV: H 0-179, S/V 0-255)
-    lime_hsv_lower: tuple = (32, 110, 110)
-    lime_hsv_upper: tuple = (52, 255, 255)
+    # lime UI colour in HSV (OpenCV: H 0-179, S/V 0-255). The default window
+    # is wide enough to catch both the native lime banner (H~42) and the
+    # yellow-shifted variant Windows HDR produces (H~30).
+    lime_hsv_lower: tuple = (25, 110, 110)
+    lime_hsv_upper: tuple = (55, 255, 255)
+    # Wider fallback for aggressive HDR setups that shift further than the
+    # default window covers. Enabled by `hdr_mode`.
+    hdr_lime_hsv_lower: tuple = (18, 110, 110)
+    hdr_lime_hsv_upper: tuple = (60, 255, 255)
+    hdr_mode: bool = False
     # key timing in ms (min, max), randomised per press
     key_hold_ms: tuple = (20, 45)
     between_keys_ms: tuple = (20, 55)
@@ -28,7 +35,7 @@ class Config:
     # saves a couple of full-res template matches per buyout poll.
     moving_background: bool = True
     # timeouts in seconds
-    timeout_results_s: float = 12.0
+    timeout_results_s: float = 25.0
     timeout_outcome_s: float = 25.0
     timeout_claim_s: float = 20.0
     timeout_generic_s: float = 10.0
@@ -47,6 +54,12 @@ class Config:
     # global hotkeys (pynput format)
     hotkey_start_stop: str = "<f8>"
     hotkey_panic: str = "<f9>"
+
+    def effective_lime_bounds(self) -> tuple:
+        """Return the (lower, upper) HSV bounds to use right now."""
+        if self.hdr_mode:
+            return self.hdr_lime_hsv_lower, self.hdr_lime_hsv_upper
+        return self.lime_hsv_lower, self.lime_hsv_upper
 
 
 _TUPLE_FIELDS = {
