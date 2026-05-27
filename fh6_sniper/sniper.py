@@ -3,7 +3,8 @@ from __future__ import annotations
 import logging
 import random
 import time
-from . import actions, capture, debug_dump, vision
+from . import actions, capture, debug_dump, paths, vision
+from .config import save_config
 from .vision import Screen
 
 log = logging.getLogger("fh6.sniper")
@@ -80,6 +81,12 @@ class Sniper:
         self.failed_buyouts = 0
         self.started_at = None
         self._stop = False
+        # One-shot guard for the auto BG-toggle recovery. The buy_out and
+        # buy_out_progress templates are the only BG-sensitive ones; when
+        # the wait for the confirm dialog times out we flip the flag,
+        # reload templates, retry once, and never auto-toggle again this
+        # session even if the second attempt also fails.
+        self._auto_bg_toggled = False
 
     def request_stop(self) -> None:
         self._stop = True
@@ -115,6 +122,36 @@ class Sniper:
         if self._stop:
             return
         self.io.press(name, times)
+
+    def _try_toggle_moving_background(self) -> bool:
+        """Auto-toggle moving_background and reload templates in place.
+
+        Fires when the buy_out wait_for has timed out - that template pair
+        is the only BG-sensitive one, so a stuck confirm dialog is almost
+        always a flag mismatch. Returns True if the toggle ran (caller
+        should retry the screen check); False if already attempted this
+        session, in which case the caller should fall through to the
+        normal recovery path."""
+        if self._auto_bg_toggled:
+            return False
+        cfg = self.cfg
+        new_value = not cfg.moving_background
+        try:
+            new_templates = vision.load_templates(
+                paths.app_dir() / cfg.template_dir,
+                moving_background=new_value)
+            self.io.templates = new_templates
+            cfg.moving_background = new_value
+            save_config(cfg, paths.app_dir() / "config.json")
+        except Exception:
+            log.exception("auto-toggle moving_background failed")
+            return False
+        self._auto_bg_toggled = True
+        log.info("auto-toggle moving_background -> %s "
+                 "(buy_out wait timed out; templates reloaded, "
+                 "saved to config.json)", new_value)
+        self._status(f"Auto-toggled moving background -> {new_value}")
+        return True
 
     def wait_for(self, screens: set, timeout: float):
         """Poll until the current screen is in `screens`, or timeout. Time
@@ -417,9 +454,18 @@ class Sniper:
         if cfg.buyout_select_delay_ms:
             self.sleeper(cfg.buyout_select_delay_ms / 1000.0)
         self._press("enter")
-        seen = self.wait_for({Screen.BUY_OUT, Screen.PLAYER_OPTIONS}, 2.5)
+        # Tight 1.0s wait: typical BUY_OUT dialog render is 200-400ms so
+        # 1.0s is ~3x margin while shaving 1.5s off the wasted time
+        # whenever the moving_background flag is wrong and the templates
+        # never match.
+        seen = self.wait_for({Screen.BUY_OUT, Screen.PLAYER_OPTIONS}, 1.0)
         if seen == Screen.PLAYER_OPTIONS:
             return self._escape_player_options()
+        if seen is None and self._try_toggle_moving_background():
+            seen = self.wait_for(
+                {Screen.BUY_OUT, Screen.PLAYER_OPTIONS}, 1.0)
+            if seen == Screen.PLAYER_OPTIONS:
+                return self._escape_player_options()
         if seen is None:
             return self._recover()
 

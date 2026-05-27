@@ -7,6 +7,9 @@ Newest changes first. Each section header is the release date.
 ### Sold-listing detection fix
 The bot was occasionally still trying to buy listings that had just sold - it would land on the View Seller / View Highest Bidder menu before backing out, wasting a cycle. Root cause: with moving background on, the bright FH6 menu scene showing through empty slots was being mistaken for a card. Detection now looks for the pure-white card UI body specifically, which the game's background scene never produces. The bot will correctly skip sold listings instead of stumbling into the wrong menu.
 
+### Auto-fix for wrong Moving background flag
+If your in-game **Moving background** setting doesn't match the **Moving background mode** toggle in the bot's Settings, the bot will now spot the mismatch on the first buyout attempt (about a second in), flip its own toggle to match, save the new value, and carry on. Costs one missed sale, then the bot runs as if the flag had been correct from the start.
+
 ## v1.1.0 - 2026-05-26
 
 ### Settings panel
