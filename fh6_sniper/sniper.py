@@ -53,6 +53,11 @@ class GameIO:
         frame = capture.grab_screen(self.cfg.window_title)
         return vision.first_buyable_slot(frame)
 
+    def slot_states(self) -> tuple:
+        """Per-slot (sold, populated) flags. Used by the render-wait gate."""
+        frame = capture.grab_screen(self.cfg.window_title)
+        return vision.slot_states(frame)
+
     def press(self, name: str, times: int = 1) -> None:
         log.info("press %s%s", name, f" x{times}" if times > 1 else "")
         actions.tap_key(name, times,
@@ -121,6 +126,27 @@ class Sniper:
         if self._stop:
             return
         self.io.press(name, times)
+
+    def _wait_for_populated_slots(self, timeout: float) -> bool:
+        """Block up to `timeout` for FH6 to render at least one card.
+
+        The RESULTS_HAS_CARS lime banner appears a frame or two before the
+        card UI is fully drawn. first_buyable_slot called on that earlier
+        frame finds zero populated slots and falsely reports 'all sold'.
+        Polling until any slot reports populated=True gives FH6 time to
+        draw the cards. Returns True once a populated slot is seen, False
+        on timeout (caller should still proceed and let the regular logic
+        decide what to do)."""
+        deadline = self.clock() + timeout
+        while self.clock() < deadline:
+            if self._stop:
+                return False
+            for _sold, populated in self.io.slot_states():
+                if populated:
+                    return True
+            self._poll_delay()
+        log.info("populated wait timed out after %.1fs", timeout)
+        return False
 
     def _try_toggle_moving_background(self) -> bool:
         """Auto-toggle moving_background and reload templates in place.
@@ -421,6 +447,12 @@ class Sniper:
         if result is not Screen.RESULTS_HAS_CARS:
             self._back_to_landing(known=result)
             return "no_cars"
+
+        # The RESULTS_HAS_CARS banner renders before the card UI itself.
+        # Wait for at least one populated card before checking slot state,
+        # otherwise first_buyable_slot returns 0 on an unrendered frame and
+        # the bot falsely reports 'all sold'.
+        self._wait_for_populated_slots(1.5)
 
         slot = self.io.first_buyable_slot()
         if slot == 0:

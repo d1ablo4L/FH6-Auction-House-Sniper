@@ -2,6 +2,11 @@
 
 Newest changes first. Each section header is the release date.
 
+## v1.1.3 - 2026-05-28
+
+### Fix: bot was wrongly skipping cars as "all sold"
+The lime "Auction Details" banner renders a frame or two before FH6 actually draws the car cards underneath it. The bot was checking the slots on that earlier frame, finding nothing rendered yet, and reporting "All listings sold, skipping" - so legitimate cars were being skipped without an attempt. The bot now waits for at least one card body to be visible before deciding what's buyable. This also stops the auto-toggle from ping-ponging the moving-background flag, since the buy-out dialog rendering race was a downstream symptom of the same root cause.
+
 ## v1.1.2 - 2026-05-27
 
 ### Clearer error when the bot can't see the game
