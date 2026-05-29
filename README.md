@@ -1,6 +1,6 @@
 # TrimSniper V.1.0.0 
 
-> **Note:** This repository is a custom rework of **Fh6-Sniper V1.0.1 **.
+> **Note:** This repository is a custom rework of **[Fh6-Sniper V1.0.1](https://github.com/FrostyIsBored/FH6-Auction-House-Sniper) **.
 
 ## Main Changes
 * **Added multi-resolution compatibility** (tested and working: 720p, 1080p, 2k & 4k)
