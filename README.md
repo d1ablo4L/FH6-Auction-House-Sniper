@@ -115,7 +115,7 @@ Windows SmartScreen mostrerà un avviso perché l'exe non è firmato digitalment
 
 ---
 
-# Impostazioni
+# Impostazioni aggiuntive 
 
 Il bot è pronto all'uso senza modifiche. Se vuoi personalizzarlo, apri **config.json** (creato nella stessa cartella dell'exe al primo avvio):
 
@@ -124,7 +124,7 @@ Il bot è pronto all'uso senza modifiche. Se vuoi personalizzarlo, apri **config
 - **collect_after_buyout** – imposta su `false` se preferisci riscuotere le auto manualmente
 - **notify_sound** / **notify_toast** – disattiva il segnale sonoro o la notifica toast alla vittoria
 - **buyout_select_delay_ms** – millisecondi aggiuntivi tra la selezione di Acquisto immediato e la pressione di Invio. Imposta a `200` se il bot apre occasionalmente la finestra Fai un'offerta invece di Acquisto immediato (predefinito: 0)
-- **moving_background** – imposta su `false` se l'opzione sfondo animato di FH6 è **disattivata** (predefinito: true)
+- **moving_background** – imposta su `false` se l'opzione sfondo animato di FH6 è **disattivata** (per HDR impostare: true)
 
 ---
 
