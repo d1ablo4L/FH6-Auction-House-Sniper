@@ -56,7 +56,7 @@ Monitora la Casa d'aste per l'auto impostata, la acquista immediatamente non app
 
 # Download
 
-Scarica l'ultima versione di **FH6-Sniper.zip** dalla [pagina Releases](https://github.com/d1ablo4L/TrimSniper/releases) ed estraila in qualsiasi cartella del tuo PC.
+Scarica l'ultima versione di **TrimSniper.zip** dalla [pagina Releases](https://github.com/d1ablo4L/TrimSniper/releases) ed estraila in qualsiasi cartella del tuo PC.
 
 ---
 
