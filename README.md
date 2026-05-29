@@ -156,4 +156,4 @@ Il bot è pronto all'uso senza modifiche. Se vuoi personalizzarlo, apri **config
 
 **Il bot si perde in una schermata e rimane bloccato** – riavvia FH6 e il bot. Assicurati che il preset grafico sia **Molto basso** e la risoluzione **1920 x 1080**.
 
-**Quando segnali problemi relativi al bot** – includi il file Sniper.log in modo che possa analizzarlo. Se il problema persiste, [apri una segnalazione](https://github.com/d1ablo4L/TrimSniper/releases/issues) o contattami su Discord "d1ablo4l".
+**Quando segnali problemi relativi al bot** – includi il file Sniper.log in modo che possa analizzarlo. Se il problema persiste, [apri una segnalazione](https://github.com/d1ablo4L/TrimSniper/issues) o contattami su Discord "d1ablo4l".
