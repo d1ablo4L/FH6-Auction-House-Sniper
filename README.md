@@ -23,11 +23,7 @@
 
 Watches the Auction House for the car you set up, buys it out the instant it appears, collects it, and loops. Set your filters once and leave it running. This tool has about a 10% buyout rate, and generally can snipe a car in under 5 mins.
 
-
-
 <img width="1655" height="792" alt="image-3" src="https://github.com/user-attachments/assets/61b58048-c3e6-4156-9510-0c2600aa7e9f" />
-<img width="340" height="488" alt="image" src="https://github.com/user-attachments/assets/d594b885-9e5d-4519-bbea-182a3d99999b" />
-
 
 ---
 
@@ -49,8 +45,7 @@ Watches the Auction House for the car you set up, buys it out the instant it app
 - Forza Horizon 6 on PC
 - 1920 x 1080 resolution - Full Screen, uncapped Frame Rate
 - Very Low graphics preset
-- Moving background turned **ON** (Or set to false in config file)
-- Game Language set to English
+- Moving background turned **ON**
 - Keyboard menu navigation (the bot uses keys, not the mouse)
 - Wired ethernet strongly recommended
 
@@ -118,7 +113,7 @@ Windows SmartScreen will warn you because the exe isn't signed. To run anyway:
 | **F8** | Start / stop |
 | **F9** | Panic stop |
 | **STOP** button | Same as F8 |
-| **✕** on overlay | Close and exit |
+| **â** on overlay | Close and exit |
 
 ---
 
@@ -162,22 +157,5 @@ The bot is ready to go out of the box. If you want to tweak it, open **config.js
 
 **Bot misses a screen and just sits there** - restart FH6 and the bot. Make sure your graphics preset is **Very Low** and your resolution is **1920 x 1080**.
 
-  **The sniper opens the Buy Out dialog but won't click Yes.**
-  <img width="1513" height="840" alt="image" src="https://github.com/user-attachments/assets/61472f11-389c-47f9-90e3-197530331486" />
-
-
-  Almost always a mismatch between FH6's **Moving Background** video setting and the sniper's. If you've turned moving backgrounds off in-game, open the **Settings** tab in  the overlay and untick **Moving background mode** so the sniper loads the right templates for your setup.
-
-  <img width="331" height="472" alt="image" src="https://github.com/user-attachments/assets/049c4dab-a718-4cab-882e-d45782f5391c" />
-
-
-  **The sniper says "Stopped: could not recover" right after Start.**
-
-  Two common causes:
-
-  - **Game language is not English.** The sniper's templates only match the English UI.
-  Switch FH6 to English under Settings > Language Select.
-  - **Capturable overlay sitting over the menus.** If you've enabled **Show overlay in screenshots & recordings**, the overlay can land on top of the area the sniper is reading. Drag it to the top-right or bottom-right corner so it doesn't overlap the game UI.
-
-  If neither helps, [open an issue](https://github.com/FrostyIsBored/FH6-Auction-House-Sniper/issues) or message me on Discord.
+**When posting issues relating to the bot** - Please include your Sniper.log so that I can look into it.  If neither helps, [open an issue](https://github.com/FrostyIsBored/FH6-Auction-House-Sniper/issues) or message me on Discord.
   **When posting issues relating to the bot** - Please include your Sniper.log so that I can look into it.
