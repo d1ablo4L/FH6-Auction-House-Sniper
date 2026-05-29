@@ -1,161 +1,159 @@
-# TrimSniper V.1.0.0 
+# TrimSniper V.1.0.0
 
-> **Note:** This repository is a custom rework of [Fh6-Sniper V1.0.1](https://github.com/FrostyIsBored/FH6-Auction-House-Sniper/tree/v1.0.1).
+> **Nota:** Questa repository è una rielaborazione personalizzata di [Fh6-Sniper V1.0.1](https://github.com/FrostyIsBored/FH6-Auction-House-Sniper/tree/v1.0.1).
 
-## Main Changes
-* **Added multi-resolution compatibility** (tested and working: 720p, 1080p, 2k & 4k)
-* **Added HDR compatibility** (if using HDR, you must enable the "moving backgrounds" option both in the bot's config and in-game)
-* **Translated the entire tool into Italian**
-* **Customized the UI** (work in progress)
+## Modifiche principali
+* **Aggiunta compatibilità multi-risoluzione** (testate e funzionanti: 720p, 1080p, 2K e 4K)
+* **Aggiunta compatibilità HDR** (se si usa l'HDR, è necessario abilitare l'opzione "sfondi animati" sia nella configurazione del bot che nel gioco)
+* **Traduzione completa dello strumento in italiano**
+* **Interfaccia utente personalizzata** (lavori in corso)
 
-## Future Changes
-* Fix incompatibility between HDR & moving backgrounds
-* Add compatibility for custom resolutions and non-standard aspect ratios
-* Add compatibility for the Italian in-game language
-* Fix minor, non-functional bugs
-* Complete the UI customization
+## Modifiche future
+* Correggere l'incompatibilità tra HDR e sfondi animati
+* Aggiungere compatibilità per risoluzioni personalizzate e rapporti d'aspetto non standard
+* Aggiungere compatibilità per la lingua italiana nel gioco
+* Correggere bug minori non funzionali
+* Completare la personalizzazione dell'interfaccia utente
 
 ---
 
 # FH6 Auction House Sniper
 
-## Automated auction house sniper for Forza Horizon 6
+## Sniper automatico per la Casa d'aste di Forza Horizon 6
 
-Watches the Auction House for the car you set up, buys it out the instant it appears, collects it, and loops. Set your filters once and leave it running. This tool has about a 10% buyout rate, and generally can snipe a car in under 5 mins.
+Monitora la Casa d'aste per l'auto impostata, la acquista immediatamente non appena appare, la riscuote e riparte in loop. Configura i filtri una sola volta e lascialo girare. Questo strumento ha un tasso di acquisto immediato di circa il 10% e in genere riesce a fare uno snipe in meno di 5 minuti.
 
 <img width="1655" height="792" alt="image-3" src="https://github.com/user-attachments/assets/61b58048-c3e6-4156-9510-0c2600aa7e9f" />
 
 ---
 
-# Features
+# Funzionalità
 
-- Automatic search and buyout
-- Skips past sold listings to find a fresh one
-- Auto-collects every car you win
-- Tiny always-on-top overlay with live stats
-- F8 start/stop, F9 panic stop
-- Auto-stops after a set number of cars or minutes
-- Smart page awareness to stop accidental misclicks to other pages
+- Ricerca e acquisto immediato automatici
+- Salta gli annunci già venduti per trovarne uno nuovo
+- Riscuote automaticamente ogni auto vinta
+- Piccola overlay sempre in primo piano con statistiche in tempo reale
+- F8 avvia/ferma, F9 stop di emergenza
+- Stop automatico dopo un numero definito di auto o di minuti
+- Riconoscimento intelligente della pagina per evitare clic accidentali su altre schermate
 
 ---
 
-# Requirements
+# Requisiti
 
-- Windows 10 or 11
-- Forza Horizon 6 on PC
-- 1920 x 1080 resolution - Full Screen, uncapped Frame Rate
-- Very Low graphics preset
-- Moving background turned **ON**
-- Keyboard menu navigation (the bot uses keys, not the mouse)
-- Wired ethernet strongly recommended
+- Windows 10 o 11
+- Forza Horizon 6 su PC
+- Risoluzione 1920 x 1080 – Schermo intero, frame rate sbloccato
+- Preset grafico Molto basso
+- Sfondo animato **ATTIVO**
+- Navigazione nei menu tramite tastiera (il bot usa i tasti, non il mouse)
+- Connessione Ethernet cablata fortemente consigliata
 
 <img width="1386" height="763" alt="image-4" src="https://github.com/user-attachments/assets/fd2bf173-259f-4458-938b-2267144ce3ab" />
 <img width="1386" height="758" alt="image-5" src="https://github.com/user-attachments/assets/34f3fe88-9575-4ec5-aa6c-0c9e04a9964c" />
-
-
 
 ---
 
 # Download
 
-Grab the latest **TrimSniper.zip** from the [Releases page](https://github.com/d1ablo4L/TrimSniper/releases) and extract it anywhere on your PC.
+Scarica l'ultima versione di **FH6-Sniper.zip** dalla [pagina Releases](https://github.com/d1ablo4L/TrimSniper/releases) ed estraila in qualsiasi cartella del tuo PC.
 
 ---
 
-# Setup
+# Configurazione
 
-## Step 1 - Open the Auction House
+## Passo 1 – Apri la Casa d'aste
 
-Launch Forza Horizon 6 and head into the Auction House at the festival site.
+Avvia Forza Horizon 6 e vai alla Casa d'aste nel sito del festival.
 
 <img width="1916" height="971" alt="image-1" src="https://github.com/user-attachments/assets/2e4c412e-974e-4bf4-9d4d-bbc31fcd2432" />
 
 ---
 
-## Step 2 - Configure your search
+## Passo 2 – Configura la ricerca
 
-Open **Search Auctions** and set your filters:
+Apri **Cerca aste** e imposta i filtri:
 
-- **Make** and **Model** for the car you want
-- **Max Buyout** as your safety net. The bot buys the first matching car without looking at the price, so this is the most you can spend per car. Set it carefully.
+- **Marca** e **Modello** dell'auto che vuoi
+- **Prezzo massimo di acquisto immediato** come limite di sicurezza. Il bot acquista la prima auto corrispondente senza controllare il prezzo, quindi questo è il massimo che puoi spendere per auto. Impostalo con attenzione.
 
-Back out so the screen sits on the **Search config** view. That's where the bot expects to start.
+Torna indietro in modo che la schermata mostri la **visualizzazione configurazione ricerca**. È lì che il bot si aspetta di iniziare.
 
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/7fac68c0-f89d-45ee-a10a-5133b02da681" />
 
 ---
 
-## Step 3 - Run the sniper
+## Passo 3 – Avvia lo sniper
 
-Double-click **FH6-Sniper.exe**. A small overlay appears in the top-left of your screen.
+Fai doppio clic su **FH6-Sniper.exe**. Apparirà una piccola overlay nell'angolo in alto a sinistra dello schermo.
 
-Click back into FH6, press **F8** or **Start**, and leave it running.
+Torna su FH6, premi **F8** o **Avvia**, e lascialo girare.
 
-To stop: **F8** again, **F9** for panic, or click **STOP** on the overlay.
+Per fermare: premi di nuovo **F8**, **F9** per lo stop di emergenza, oppure clicca **STOP** sull'overlay.
 
 <img width="1902" height="1062" alt="image-2" src="https://github.com/user-attachments/assets/ccdfba46-4c90-42de-bb79-fe26658bb262" />
 
 ---
 
-# SmartScreen Warning
+# Avviso SmartScreen
 
-Windows SmartScreen will warn you because the exe isn't signed. To run anyway:
+Windows SmartScreen mostrerà un avviso perché l'exe non è firmato digitalmente. Per eseguirlo comunque:
 
-1. Click **More info**
-2. Click **Run anyway**
+1. Clicca su **Ulteriori informazioni**
+2. Clicca su **Esegui comunque**
 
 ---
 
-# Hotkeys
+# Tasti rapidi
 
-| Key | Action |
+| Tasto | Azione |
 |---|---|
-| **F8** | Start / stop |
-| **F9** | Panic stop |
-| **STOP** button | Same as F8 |
-| **â** on overlay | Close and exit |
+| **F8** | Avvia / ferma |
+| **F9** | Stop di emergenza |
+| Pulsante **STOP** | Come F8 |
+| **✕** sull'overlay | Chiudi ed esci |
 
 ---
 
-# Settings
+# Impostazioni
 
-The bot is ready to go out of the box. If you want to tweak it, open **config.json** (created next to the exe on first run):
+Il bot è pronto all'uso senza modifiche. Se vuoi personalizzarlo, apri **config.json** (creato nella stessa cartella dell'exe al primo avvio):
 
-- **max_cars** - auto-stop after this many wins (default: 1)
-- **max_minutes** - auto-stop after this many minutes (default: 180)
-- **collect_after_buyout** - set to `false` if you'd rather collect cars manually
-- **notify_sound** / **notify_toast** - turn the win beep or toast off
-- **buyout_select_delay_ms** - extra ms between selecting Buy Out and pressing Enter. Bump to `200` if the bot occasionally opens the Place Bid dialog instead of Buy Out (default: 0)
-- **moving_background** - set to `false` if you have FH6's moving background video setting turned **off** (default: true)
+- **max_cars** – stop automatico dopo questo numero di vittorie (predefinito: 1)
+- **max_minutes** – stop automatico dopo questi minuti (predefinito: 180)
+- **collect_after_buyout** – imposta su `false` se preferisci riscuotere le auto manualmente
+- **notify_sound** / **notify_toast** – disattiva il segnale sonoro o la notifica toast alla vittoria
+- **buyout_select_delay_ms** – millisecondi aggiuntivi tra la selezione di Acquisto immediato e la pressione di Invio. Imposta a `200` se il bot apre occasionalmente la finestra Fai un'offerta invece di Acquisto immediato (predefinito: 0)
+- **moving_background** – imposta su `false` se l'opzione sfondo animato di FH6 è **disattivata** (predefinito: true)
 
 ---
 
-# Important
+# Importante
 
 > [!WARNING]
-> - Auction House automation may violate Forza's Enforcement Guidelines.
-> - Results may vary depending on PC/Network setups. 
-> - You risk a warning, suspension, or a permanent ban.
-> - Use at your own risk.
+> - L'automazione della Casa d'aste potrebbe violare le Linee guida di condotta di Forza.
+> - I risultati possono variare in base alla configurazione del PC e della rete.
+> - Si rischia un avviso, una sospensione o un ban permanente.
+> - Usalo a tuo rischio e pericolo.
 
 ---
 
-# Notes
+# Note
 
-- The bot only runs while FH6 is the focused window. The overlay shows **Paused** if you tab out. Click back into the game to resume.
-- The overlay is hidden from screen capture, so you can leave it anywhere on screen.
-- Drag the overlay by clicking and holding the header.
-- You won't win every snipe. The bot is limited by FH6's menu animations and the auction server response, same as any other tool.
-- If servers are slow / overloaded it will cause the bot to break (Shall have a fix for it soon)
+- Il bot funziona solo mentre FH6 è la finestra attiva. L'overlay mostra **In pausa** se passi ad un'altra finestra. Clicca di nuovo sul gioco per riprendere.
+- L'overlay è nascosta dalle acquisizioni schermo, quindi puoi lasciarla ovunque sullo schermo.
+- Trascina l'overlay cliccando e tenendo premuta la barra del titolo.
+- Non vincerai ogni snipe. Il bot è limitato dalle animazioni dei menu di FH6 e dalla risposta del server delle aste, come qualsiasi altro strumento.
+- Se i server sono lenti o sovraccarichi, il bot potrebbe smettere di funzionare correttamente (una correzione è in arrivo a breve).
+
 ---
 
-# Troubleshooting
+# Risoluzione dei problemi
 
-**Overlay says "Paused"** - FH6 isn't focused. Click into the game.
+**L'overlay mostra "In pausa"** – FH6 non è la finestra attiva. Clicca sul gioco.
 
-**F8 doesn't do anything** - another app on your PC might be hooking the F8 key. Close it, or change the hotkey in `config.json`.
+**F8 non fa nulla** – un'altra applicazione sul tuo PC potrebbe intercettare il tasto F8. Chiudila, oppure cambia il tasto rapido in `config.json`.
 
-**Bot misses a screen and just sits there** - restart FH6 and the bot. Make sure your graphics preset is **Very Low** and your resolution is **1920 x 1080**.
+**Il bot si perde in una schermata e rimane bloccato** – riavvia FH6 e il bot. Assicurati che il preset grafico sia **Molto basso** e la risoluzione **1920 x 1080**.
 
-**When posting issues relating to the bot** - Please include your Sniper.log so that I can look into it.  If neither helps, [open an issue](https://github.com/FrostyIsBored/FH6-Auction-House-Sniper/issues) or message me on Discord.
-  **When posting issues relating to the bot** - Please include your Sniper.log so that I can look into it.
+**Quando segnali problemi relativi al bot** – includi il file Sniper.log in modo che possa analizzarlo. Se il problema persiste, [apri una segnalazione](https://github.com/d1ablo4L/TrimSniper/releases/issues) o contattami su Discord "d1ablo4l".
